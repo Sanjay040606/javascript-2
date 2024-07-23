@@ -1,0 +1,101 @@
+<!-- using function rock paper seesior game -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Sessior Game</title>
+</head>
+<body>
+    <main>
+        <h1>Enjoy the Game</h1>
+    </main>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        html , body{
+            width: 100%;
+            font-size: 16px;
+            background-color: black;
+            color: antiquewhite;
+        }
+        main{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1{
+            font-size: 250%;
+        }   
+    </style>
+    <script>
+        initGame = () => {
+            const startGame = confirm("Shall ! we Play Rock , Paper , or Sessior");
+            startGame ? playGame() : endGame();
+        }
+        playGame = () => {
+            let userInput = userInput1();
+            FormatUserInput(userInput) ? validUserInput(formatUserInput) : notDeciedToPlay()
+        }
+        validUserInput = (formatUserInput) => {
+            if(formatUserInput === "rock" || formatUserInput === "paper" || formatUserInput === "sessior" ||formatUserInput ===""){
+                let winner = result(formatUserInput);
+                alert(winner);
+                playAgain();
+            }else{
+                alert("You didn't enter Rock , Paper , or Sessior")
+                playAgain()
+            }
+        }
+        playAgain = () => {
+            var confirmToPlay = confirm("Play again!");
+            if(confirmToPlay){
+                playGame()
+            }
+            else{
+                alert("Thanks ! For Playing")
+            }
+
+        }
+        result = (formatUserInput) => {
+            let computerValueToUser = computerValue()
+            let winner = formatUserInput==computerValueToUser ?  `PlayerOne: ${formatUserInput}\nComputer: ${computerValueToUser}\n\nMatch Tie !` : 
+            formatUserInput == "rock" ? computerValueToUser=="sessior" ? `PlayerOne: ${formatUserInput}\nComputer: ${computerValueToUser}\n\nPlayers Wins`: `PlayerOne: ${formatUserInput}\nComputer: ${computerValueToUser}\n\nComputer Wins` : 
+            formatUserInput == "paper" ? computerValueToUser=="sessior" ? `PlayerOne: ${formatUserInput}\nComputer: ${computerValueToUser}\n\nComputer Wins`  : `PlayerOne: ${formatUserInput}\nComputer: ${computerValueToUser}\n\nPlayers Wins` : 
+            formatUserInput == "sessior" ? computerValueToUser=="rock" ? `PlayerOne: ${formatUserInput}\nComputer: ${computerValueToUser}\n\nComputer Wins`  : `PlayerOne: ${formatUserInput}\nComputer: ${computerValueToUser}\n\nPlayers Wins` : 
+            "You didn't enter Rock , Paper , or Sessior";
+            return winner;
+        }
+        computerValue = () => {
+            var randomNumberForComputer = Math.floor(Math.random()*3);
+            let computerPlay = ["rock" , "paper" , "sessior"];
+            let computerValue = computerPlay[randomNumberForComputer];
+            return computerValue;
+        }
+        notDeciedToPlay =  () => {
+            alert("I guess you changed your mind , Maybe Next Time.")
+        }
+        FormatUserInput = (userInput) => {
+            if(userInput || userInput === ""){
+                formatUserInput = userInput.trim().toLowerCase();
+                return true;
+                //return formatUserInput;
+            }else{
+                return false;
+            }
+        }
+        userInput1 = () => {
+            return prompt("Please Enter a Rock , Paper , or Sessior");
+        }
+        endGame = () => {
+            alert("Ok, May Be Next Time.");
+        }
+        initGame()
+    </script>
+</body>
+</html>
